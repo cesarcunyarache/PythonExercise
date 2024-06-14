@@ -39,16 +39,14 @@ for producto, cantidad, precio in zip(productos, cantidades, precios):
 G = nx.Graph()
 for producto, cantidad, precio in zip(productos, cantidades, precios):
     if producto not in G.nodes:
-        G.add_node(producto, cantidad_vendida=0, ingreso_total=0)
-    G.nodes[producto]['cantidad_vendida'] += cantidad
-    G.nodes[producto]['ingreso_total'] += cantidad * precio
+        G.add_node(producto, cantidad_vendida=cantidad, ingreso_total=cantidad*precio)
 
-plt.figure(figsize=(12, 6))
+
+plt.figure()
 node_size = [G.nodes[n]['ingreso_total'] for n in G.nodes()]
-nx.draw(G, with_labels=True, node_color='skyblue', node_size=node_size, font_size=10)
-plt.title("Grafo de Productos basado en Ventas")
+nx.draw(G, with_labels=True, node_size=node_size, font_size=10)
 plt.show()
-plt.close()
+
 
 # Sympy: Manipulación y Resolución de Expresiones Simbólicas
 ventas = list(zip(productos, cantidades, precios))
